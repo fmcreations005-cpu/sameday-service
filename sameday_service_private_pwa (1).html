@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111318">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SAME DAY SERVICE">
+<title>SAME DAY SERVICE — Appliance Repair</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#16181d;--muted:#707784;--line:#e7e9ee;--dark:#111318;--blue:#2563eb;--green:#15803d;--amber:#a16207;--red:#b91c1c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text)}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.shell{max-width:480px;margin:auto;min-height:100vh;background:#fff;position:relative;box-shadow:0 0 30px #0001}.top{padding:16px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:10;display:flex;justify-content:space-between;align-items:center}.logo{font-size:19px;font-weight:900}.logo span{color:var(--blue)}.top small{color:var(--muted)}.screen{display:none;padding-bottom:82px}.screen.active{display:block}.pad{padding:16px}.hero{margin:16px;background:#111318;color:#fff;border-radius:20px;padding:23px}.hero h1{font-size:27px;margin:0 0 7px}.hero p{color:#c9cbd0;margin:0 0 18px}.primary{background:var(--dark);color:#fff;padding:12px 16px;border-radius:10px;font-weight:800}.blue{background:var(--blue);color:#fff}.light{background:#f0f2f5;color:#222}.section{margin-top:22px}.section h2{font-size:18px;margin:0}.muted{font-size:13px;color:var(--muted)}.services{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.service{border:1px solid var(--line);border-radius:13px;padding:12px 6px;text-align:center;background:#fff}.service .i{font-size:28px}.service b{font-size:11px;display:block;margin-top:5px}.dealrow{display:flex;gap:10px;overflow:auto;margin-top:12px}.deal{min-width:190px;background:#f0f5ff;border-radius:13px;padding:15px}.deal b{font-size:14px}.deal p{font-size:12px;color:#697386;margin:5px 0 0}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:11px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.option{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:9px;display:flex;justify-content:space-between;align-items:center}.option.sel{border:2px solid var(--dark)}.back{padding:16px;border-bottom:1px solid var(--line);font-weight:800}.back button{background:none;font-size:20px}.field{margin:12px 0}.field label{display:block;font-size:11px;font-weight:800;margin-bottom:6px;color:#606774}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #dfe2e8;border-radius:9px;outline:0;background:#fff}.field textarea{min-height:85px}.sticky{position:fixed;bottom:61px;left:50%;transform:translateX(-50%);width:min(448px,calc(100% - 32px));z-index:8;padding:14px;background:var(--dark);color:#fff;border-radius:10px;font-weight:800}.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);height:62px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;z-index:9}.bottom button{background:#fff;color:#747a85;font-size:10px}.bottom b{display:block;font-size:18px}.bottom .on{color:#111;font-weight:800}.badge{display:inline-block;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:800}.pending{background:#fff5d7;color:var(--amber)}.progress{background:#e0f2fe;color:#0369a1}.done{background:#dcfce7;color:var(--green)}.cancel{background:#fee2e2;color:var(--red)}.tabs{display:flex;background:#f0f1f4;padding:4px;border-radius:10px;margin-bottom:15px}.tabs button{flex:1;padding:9px;border-radius:8px;background:transparent;font-size:12px}.tabs button.active{background:#fff;font-weight:800}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat b{font-size:24px;display:block;margin-top:5px}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:10px 6px;border-bottom:1px solid var(--line);font-size:12px}.table th{font-size:10px;color:var(--muted);text-transform:uppercase}.scroll{overflow:auto}.notice{background:#eff6ff;padding:13px;border-radius:11px;font-size:13px}.success{background:#ecfdf3;color:#166534;padding:16px;border-radius:12px}.map{height:180px;border-radius:14px;background:linear-gradient(135deg,#e8eef4 25%,#dce5dc 25% 45%,#edf0e9 45% 70%,#d9e3ec 70%);position:relative;overflow:hidden}.map:before,.map:after{content:"";position:absolute;background:#fff8;width:150%;height:10px;top:70px;left:-20px;transform:rotate(24deg);box-shadow:0 45px #fff8}.map:after{top:130px;transform:rotate(-20deg)}.pin{position:absolute;left:52%;top:45%;font-size:30px;z-index:2}.login{min-height:100vh;display:flex;align-items:center;padding:22px;background:#111318}.loginbox{background:#fff;border-radius:20px;padding:24px;width:100%}.rolecards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:12px 0}.rolecards button{padding:12px 5px;border:1px solid var(--line);background:#fff;border-radius:9px;font-size:11px}.rolecards .sel{border:2px solid #111}.modal{display:none;position:fixed;inset:0;background:#0007;z-index:30;align-items:center;justify-content:center;padding:15px}.modal.show{display:flex}.modalbox{background:#fff;width:min(450px,100%);border-radius:18px;padding:20px;max-height:90vh;overflow:auto}.close{float:right;background:#eee;padding:7px 10px;border-radius:8px}
+@media(min-width:700px){body{padding:20px}.shell{border-radius:18px;overflow:hidden}}
+</style>
+</head>
+<body>
+<div id="login" class="login">
+ <div class="loginbox">
+  <div class="logo"><span>SAME DAY</span> SERVICE ⚡</div>
+  <h1>One system for every service.</h1><p class="muted">Customer booking • Technician jobs • Admin operations</p>
+  <div class="rolecards">
+   <button id="rCustomer" class="sel" onclick="setRole('customer')">👤<br>Customer</button>
+   <button id="rTech" onclick="setRole('tech')">🧑‍🔧<br>Technician</button>
+   <button id="rAdmin" onclick="setRole('admin')">🖥️<br>Admin</button>
+  </div>
+  <div class="field"><label>PHONE / EMAIL</label><input id="loginId" placeholder="Enter your number"></div>
+  <div class="field"><label>PASSWORD</label><input type="password" value="123456"></div>
+  <button class="primary blue" style="width:100%" onclick="login()">Continue</button>
+  <p class="muted" style="text-align:center;margin-bottom:0">Demo login — no real account required</p>
+ </div>
+</div>
+
+<div class="shell" id="app" style="display:none">
+<header class="top"><div><div class="logo"><span>SAME DAY</span> SERVICE ⚡</div><small id="roleLabel">Customer</small></div><div><button id="installBtn" class="light" style="padding:8px 10px;border-radius:8px;display:none" onclick="installApp()">Install</button>
+<button class="light" style="padding:8px 10px;border-radius:8px" onclick="logout()">Logout</button></div></header>
+
+<!-- CUSTOMER -->
+<div id="customerApp" class="screen">
+ <div id="cHome" class="customerPage">
+  <div class="hero"><h1>Repair at your doorstep.</h1><p>Verified appliance technicians with transparent service.</p><button class="primary" style="background:#fff;color:#111" onclick="cStart()">Book a service →</button></div>
+  <div class="pad"><div class="section"><h2>What do you need help with?</h2><div class="services">
+   <div class="service" onclick="cChoose('Washing Machine')"><div class="i">🧺</div><b>Washing Machine</b></div>
+   <div class="service" onclick="cChoose('Refrigerator')"><div class="i">❄️</div><b>Refrigerator</b></div>
+   <div class="service" onclick="cChoose('Microwave')"><div class="i">📡</div><b>Microwave</b></div>
+   <div class="service" onclick="cChoose('AC')"><div class="i">🌬️</div><b>AC Repair</b></div>
+   <div class="service" onclick="cChoose('TV')"><div class="i">📺</div><b>TV Repair</b></div>
+   <div class="service" onclick="cChoose('Other')"><div class="i">🔧</div><b>Other</b></div>
+  </div></div>
+  <div class="section"><h2>Popular</h2><div class="dealrow"><div class="deal"><b>Washing Machine Repair</b><p>Inspection from ₹499</p></div><div class="deal"><b>Microwave Repair</b><p>Doorstep diagnosis</p></div></div></div>
+  <div class="section"><h2>Why ApplianceCare?</h2><div class="stats"><div class="card">✓ <b>Verified pros</b><br><span class="muted">Trained technicians</span></div><div class="card">★ <b>Transparent</b><br><span class="muted">Clear pricing</span></div></div></div></div>
+ </div>
+ <div id="cBook" class="customerPage" style="display:none"></div>
+ <div id="cBookings" class="customerPage" style="display:none"></div>
+</div>
+
+<!-- TECH -->
+<div id="techApp" class="screen">
+ <div class="pad">
+  <div class="hero" style="margin:0 0 16px"><h1>Technician Dashboard</h1><p id="techGreeting">Welcome, Arun</p><button class="primary" style="background:#fff;color:#111" onclick="techRefresh()">Refresh jobs</button></div>
+  <div class="stats"><div class="card stat"><span class="muted">Today's Jobs</span><b id="tToday">3</b></div><div class="card stat"><span class="muted">Completed</span><b id="tDone">1</b></div></div>
+  <div class="section"><div class="row"><h2>Assigned jobs</h2><span class="muted">Live queue</span></div><div id="techJobs" style="margin-top:12px"></div></div>
+ </div>
+</div>
+
+<!-- ADMIN -->
+<div id="adminApp" class="screen">
+ <div class="pad">
+  <div class="hero" style="margin:0 0 16px"><h1>Operations Center</h1><p>Manage bookings, technicians and revenue.</p></div>
+  <div class="stats"><div class="card stat"><span class="muted">Bookings</span><b id="aJobs">0</b></div><div class="card stat"><span class="muted">Pending</span><b id="aPending">0</b></div><div class="card stat"><span class="muted">Technicians</span><b>12</b></div><div class="card stat"><span class="muted">Revenue</span><b id="aRevenue">₹0</b></div></div>
+  <div class="section card"><div class="row"><h2>Bookings</h2><button class="light" style="padding:8px;border-radius:8px" onclick="adminRefresh()">Refresh</button></div><div class="scroll" style="margin-top:10px"><table class="table"><thead><tr><th>ID</th><th>Customer</th><th>Appliance</th><th>Status</th><th>Amount</th></tr></thead><tbody id="adminRows"></tbody></table></div></div>
+  <div class="section card"><h2>Technician availability</h2><div id="adminTechs" style="margin-top:10px"></div></div>
+ </div>
+</div>
+
+<nav class="bottom" id="customerNav">
+ <button class="on" onclick="cTab('home',this)"><b>⌂</b>Home</button><button onclick="cStart()"><b>＋</b>Book</button><button onclick="cTab('bookings',this)"><b>▣</b>Bookings</button><button onclick="alert('Support: WhatsApp +91 9606211463')"><b>?</b>Help</button>
+</nav>
+<nav class="bottom" id="techNav" style="display:none">
+ <button class="on"><b>▦</b>Jobs</button><button onclick="alert('Location sharing started for active job')"><b>📍</b>Location</button><button onclick="alert('Profile: Arun • 4.8 ★')"><b>♙</b>Profile</button>
+</nav>
+<nav class="bottom" id="adminNav" style="display:none">
+ <button class="on" onclick="adminRefresh()"><b>▦</b>Dashboard</button><button onclick="alert('Customers module ready')"><b>♙</b>Customers</button><button onclick="alert('Reports module ready')"><b>◔</b>Reports</button>
+</nav>
+</div>
+
+<div class="modal" id="modal"><div class="modalbox"><button class="close" onclick="closeModal()">✕</button><h2 id="mTitle"></h2><div id="mBody"></div></div></div>
+
+<script>
+const problems={
+'Washing Machine':['Not starting','Not draining','Not spinning','Making noise','Water leakage','General service'],
+'Refrigerator':['Not cooling','Ice build-up','Water leakage','Noise issue','Compressor issue','General service'],
+'Microwave':['Not heating','Sparking','Turntable issue','Door problem','Power issue','General service'],
+'AC':['Not cooling','Water leakage','Bad smell','Not starting','Noise issue','General service'],
+'TV':['No display','No sound','Power issue','Screen problem','Remote issue','General service'],
+'Other':['Not working','Noise issue','Power issue','Leakage','General service']
+};
+let role='customer', selectedAppliance='Washing Machine', selectedProblem='Not starting';
+let data=JSON.parse(localStorage.getItem('appliancecareData')||'null')||[
+{id:'AC1001',customer:'Rahul Kumar',phone:'9876543210',appliance:'Washing Machine',problem:'Not draining',date:'2026-09-14',time:'12 PM – 3 PM',address:'HSR Layout, Bengaluru',tech:'Arun',status:'Pending',amount:799},
+{id:'AC1002',customer:'Priya S',phone:'9988776655',appliance:'Microwave',problem:'Not heating',date:'2026-09-14',time:'3 PM – 6 PM',address:'BTM Layout, Bengaluru',tech:'Imran',status:'In Progress',amount:1250}
+];
+function save(){localStorage.setItem('appliancecareData',JSON.stringify(data))}
+function setRole(r){role=r;['Customer','Tech','Admin'].forEach(x=>document.getElementById('r'+x).classList.remove('sel'));document.getElementById('r'+({customer:'Customer',tech:'Tech',admin:'Admin'}[r])).classList.add('sel')}
+function login(){document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';document.getElementById('roleLabel').textContent=role==='customer'?'Customer':role==='tech'?'Technician':'Admin';document.getElementById('customerApp').classList.toggle('active',role==='customer');document.getElementById('techApp').classList.toggle('active',role==='tech');document.getElementById('adminApp').classList.toggle('active',role==='admin');document.getElementById('customerNav').style.display=role==='customer'?'flex':'none';document.getElementById('techNav').style.display=role==='tech'?'flex':'none';document.getElementById('adminNav').style.display=role==='admin'?'flex':'none';if(role==='tech')techRefresh();if(role==='admin')adminRefresh()}
+function logout(){location.reload()}
+function cTab(x,btn){document.querySelectorAll('.customerPage').forEach(e=>e.style.display='none');document.getElementById('c'+(x==='home'?'Home':'Bookings')).style.display='block';document.querySelectorAll('#customerNav button').forEach(e=>e.classList.remove('on'));btn.classList.add('on');if(x==='bookings')renderCustomerBookings()}
+function cChoose(x){selectedAppliance=x;cStart()}
+function cStart(){document.getElementById('cHome').style.display='none';let box=document.getElementById('cBook');box.style.display='block';renderStep1()}
+function renderStep1(){document.getElementById('cBook').innerHTML=`<div class="back"><button onclick="cHome()">←</button> Select appliance</div><div class="pad"><p class="muted">What needs repair?</p>${Object.keys(problems).map(x=>`<div class="option ${x===selectedAppliance?'sel':''}" onclick="selectedAppliance='${x}';renderStep1()"><span>${x==='Washing Machine'?'🧺':x==='Refrigerator'?'❄️':x==='Microwave'?'📡':x==='AC'?'🌬️':x==='TV'?'📺':'🔧'} &nbsp;<b>${x}</b></span>›</div>`).join('')}</div><button class="sticky" onclick="renderStep2()">Continue</button>`}
+function renderStep2(){document.getElementById('cBook').innerHTML=`<div class="back"><button onclick="renderStep1()">←</button> Select problem</div><div class="pad">${problems[selectedAppliance].map(x=>`<div class="option ${x===selectedProblem?'sel':''}" onclick="selectedProblem='${x}';renderStep2()"><b>${x}</b> ›</div>`).join('')}</div><button class="sticky" onclick="renderStep3()">Continue</button>`}
+function renderStep3(){let tomorrow=new Date(Date.now()+86400000).toISOString().slice(0,10);document.getElementById('cBook').innerHTML=`<div class="back"><button onclick="renderStep2()">←</button> Date & time</div><div class="pad"><div class="field"><label>DATE</label><input id="bDate" type="date" value="${tomorrow}"></div><div class="field"><label>TIME SLOT</label><select id="bTime"><option>9 AM – 12 PM</option><option>12 PM – 3 PM</option><option>3 PM – 6 PM</option><option>6 PM – 9 PM</option></select></div></div><button class="sticky" onclick="renderStep4()">Continue</button>`}
+function renderStep4(){document.getElementById('cBook').innerHTML=`<div class="back"><button onclick="renderStep3()">←</button> Service address</div><div class="pad"><div class="field"><label>NAME</label><input id="bName" placeholder="Your name"></div><div class="field"><label>PHONE</label><input id="bPhone" placeholder="10-digit mobile"></div><div class="field"><label>ADDRESS</label><textarea id="bAddr" placeholder="Flat / house, street, area"></textarea></div><div class="notice">🔒 Your details are used only to arrange the service.</div></div><button class="sticky" onclick="createBooking()">Confirm booking • ₹499+</button>`}
+function createBooking(){if(!bName.value.trim()||!bPhone.value.trim()||!bAddr.value.trim()){alert('Please fill name, phone and address');return}let id='AC'+Math.floor(1000+Math.random()*8999);let amount=selectedProblem==='General service'?499:799;data.unshift({id,customer:bName.value,phone:bPhone.value,appliance:selectedAppliance,problem:selectedProblem,date:bDate.value,time:bTime.value,address:bAddr.value,tech:'Arun',status:'Pending',amount});save();document.getElementById('cBook').innerHTML=`<div class="back">Booking confirmed</div><div class="pad"><div class="success"><div style="font-size:42px">✓</div><h2>You're booked!</h2><p>Booking ID <b>${id}</b></p><span class="muted">Technician will contact you before arrival.</span></div><div class="card"><b>${selectedAppliance}</b><br><span class="muted">${selectedProblem}</span><br><br>📅 ${bDate.value} • ${bTime.value}<br>📍 ${bAddr.value}<br><br><strong>Starting ₹${amount}</strong></div><button class="primary blue" style="width:100%" onclick="trackCustomer('${id}')">Track technician</button></div>`}
+function trackCustomer(id){let x=data.find(a=>a.id===id);document.getElementById('cBook').innerHTML=`<div class="back"><button onclick="cTab('bookings',document.querySelector('#customerNav button:nth-child(3)'))">←</button> Track technician</div><div class="pad"><div class="card"><b>${x.tech} is assigned</b><br><span class="muted">⭐ 4.8 • Verified professional</span></div><div class="map"><div class="pin">📍</div></div><div class="card"><div class="row"><b>Booking ${x.id}</b>${badge(x.status)}</div><p class="muted">${x.appliance} • ${x.problem}</p></div>${['Booking confirmed','Technician assigned','On the way','Service completed'].map((s,i)=>`<div style="display:flex;gap:12px;margin:18px 0"><b>${i<2?'●':'○'}</b><div><b>${s}</b><br><span class="muted">${i<2?'Completed':'Waiting for update'}</span></div></div>`).join('')}<button class="primary" style="width:100%" onclick="alert('WhatsApp support: +91 9606211463')">💬 WhatsApp support</button></div>`}
+function renderCustomerBookings(){document.getElementById('cBookings').innerHTML=`<div class="back">My bookings</div><div class="pad">${data.slice(0,10).map(x=>`<div class="card" onclick="trackCustomer('${x.id}')"><div class="row"><b>${x.appliance}</b>${badge(x.status)}</div><span class="muted">${x.id} • ${x.problem}</span><p>📅 ${x.date} • ${x.time}</p><b>₹${x.amount}</b></div>`).join('')||'<div class="muted">No bookings yet.</div>'}</div>`}
+function cHome(){document.getElementById('cBook').style.display='none';document.getElementById('cHome').style.display='block'}
+function badge(s){let c=s==='Completed'?'done':s==='In Progress'?'progress':s==='Cancelled'?'cancel':'pending';return `<span class="badge ${c}">${s}</span>`}
+function techRefresh(){let jobs=data.filter(x=>x.tech==='Arun'&&x.status!=='Completed'&&x.status!=='Cancelled');document.getElementById('tToday').textContent=jobs.length;document.getElementById('tDone').textContent=data.filter(x=>x.tech==='Arun'&&x.status==='Completed').length;document.getElementById('techJobs').innerHTML=jobs.map(x=>`<div class="card"><div class="row"><b>${x.appliance}</b>${badge(x.status)}</div><p><b>${x.customer}</b><br><span class="muted">${x.phone}</span></p><p>🔧 ${x.problem}<br>📍 ${x.address}<br>📅 ${x.date} • ${x.time}</p><div style="display:flex;gap:7px"><button class="primary" style="flex:1" onclick="techAction('${x.id}')">${x.status==='Pending'?'Accept job':'Update job'}</button><button class="light" style="padding:10px;border-radius:9px" onclick="alert('Navigation opened for '+x.address)">📍</button></div></div>`).join('')||'<div class="card muted">No assigned jobs.</div>'}
+function techAction(id){let x=data.find(a=>a.id===id);if(x.status==='Pending')x.status='In Progress';else if(x.status==='In Progress')x.status='Completed';save();techRefresh();alert(x.status==='Completed'?'Job completed!':'Job started. Customer status updated.')}
+function adminRefresh(){document.getElementById('aJobs').textContent=data.length;document.getElementById('aPending').textContent=data.filter(x=>x.status==='Pending').length;document.getElementById('aRevenue').textContent='₹'+data.reduce((a,x)=>a+x.amount,0).toLocaleString();document.getElementById('adminRows').innerHTML=data.map(x=>`<tr><td>${x.id}</td><td>${x.customer}</td><td>${x.appliance}</td><td><select onchange="adminStatus('${x.id}',this.value)" style="border:0">${['Pending','In Progress','Completed','Cancelled'].map(s=>`<option ${s===x.status?'selected':''}>${s}</option>`).join('')}</select></td><td>₹${x.amount}</td></tr>`).join('');document.getElementById('adminTechs').innerHTML=['Arun','Imran','Vikas','Sameer'].map((n,i)=>`<div class="row card"><b>🧑‍🔧 ${n}</b><span class="badge ${i===1?'progress':'done'}">${i===1?'On Job':'Available'}</span></div>`).join('')}
+function adminStatus(id,v){let x=data.find(a=>a.id===id);x.status=v;save();adminRefresh()}
+function openModal(){document.getElementById('modal').classList.add('show')}function closeModal(){document.getElementById('modal').classList.remove('show')}
+
+let deferredPrompt=null;
+const manifest={
+  name:"SAME DAY SERVICE",short_name:"SAME DAY SERVICE",start_url:".",display:"standalone",
+  background_color:"#ffffff",theme_color:"#111318",description:"Private appliance repair booking app"
+};
+const mBlob=new Blob([JSON.stringify(manifest)],{type:"application/manifest+json"});
+const mUrl=URL.createObjectURL(mBlob);
+const ml=document.createElement("link");ml.rel="manifest";ml.href=mUrl;document.head.appendChild(ml);
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;const b=document.getElementById("installBtn");if(b)b.style.display="inline-block"});
+async function installApp(){if(!deferredPrompt){alert("Chrome menu ⋮ → Add to Home screen / Install app use karein.");return}deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;document.getElementById("installBtn").style.display="none"}
+</script>
+</body>
+</html>
