@@ -3,124 +3,666 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sameday Repair — Customer & Technician App</title>
-<meta name="description" content="Sameday Repair appliance service booking app. Book a technician, assign jobs and track service status.">
+<title>Sameday Repair | Appliance Repair Booking</title>
+<meta name="description" content="Sameday Repair - Washing Machine, Refrigerator, Microwave Oven and AC repair service. Book a technician and track your service.">
+
 <style>
-:root{--blue:#2563eb;--dark:#0f172a;--bg:#f4f7fb;--card:#fff;--muted:#64748b;--line:#e2e8f0;--green:#16a34a}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui,Arial;color:#0f172a}
-button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:480px;min-height:100vh;margin:auto;background:#fff;box-shadow:0 0 35px #00000012}
-.top{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;padding:22px 18px 25px;border-radius:0 0 26px 26px}
-.brand{font-weight:900;font-size:22px}.brand span{color:#93c5fd}.top small{opacity:.75}.screen{padding:18px}.nav{display:flex;gap:8px;background:#fff;padding:10px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}.nav button{flex:1;border:0;background:#eef2ff;padding:10px;border-radius:10px;font-weight:800;color:#334155}.nav button.active{background:var(--blue);color:#fff}
-.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:13px}.hero-card{margin-top:18px;background:#eff6ff;border:0}.title{font-size:25px;font-weight:900;margin:4px 0 8px}.muted{color:var(--muted);font-size:14px;line-height:1.5}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.service{border:1px solid var(--line);background:#fff;padding:16px;border-radius:14px;text-align:left}.service b{display:block;margin-top:7px}.icon{font-size:27px}.field{margin:10px 0}.field label{font-size:12px;font-weight:800;color:#475569;display:block;margin-bottom:5px}input,select,textarea{width:100%;border:1px solid #cbd5e1;border-radius:11px;padding:12px;outline:none}textarea{min-height:85px}.primary,.success,.danger,.ghost{border:0;border-radius:11px;padding:12px 15px;font-weight:900}.primary{background:var(--blue);color:#fff}.success{background:var(--green);color:#fff}.danger{background:#fee2e2;color:#991b1b}.ghost{background:#f1f5f9;color:#334155}.full{width:100%}.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.pill{font-size:11px;font-weight:900;padding:6px 9px;border-radius:99px;background:#dbeafe;color:#1d4ed8}.hidden{display:none!important}.status{display:flex;gap:5px;margin:13px 0}.dot{flex:1;height:7px;background:#e2e8f0;border-radius:99px}.dot.on{background:var(--blue)}.amount{font-size:26px;font-weight:900}.login{min-height:100vh;padding:35px 22px;display:flex;flex-direction:column;justify-content:center}.login .logo{font-size:34px;font-weight:950;margin-bottom:8px}.login .logo span{color:var(--blue)}.note{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}.tabs{display:flex;gap:8px;margin-bottom:15px}.tabs button{flex:1}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#0f172a;color:#fff;padding:12px 16px;border-radius:12px;font-weight:700;display:none;z-index:99}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:linear-gradient(135deg,#0757d9,#13a0ff);color:white;padding:22px 18px}
+.logo{font-size:25px;font-weight:800}
+.wrap{max-width:1000px;margin:auto;padding:18px}
+.card{background:white;border-radius:18px;padding:20px;margin:15px 0;box-shadow:0 5px 25px #00000012}
+h1,h2,h3{margin-top:0}
+input,select,textarea,button{
+width:100%;padding:13px;margin:7px 0;border-radius:10px;
+border:1px solid #d8dee9;font-size:15px
+}
+textarea{min-height:90px}
+button{border:0;background:#0757d9;color:white;font-weight:700;cursor:pointer}
+button.secondary{background:#eef4ff;color:#0757d9}
+button.danger{background:#dc3545}
+.hidden{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.status{display:inline-block;padding:7px 12px;border-radius:20px;background:#e8f2ff;color:#0757d9;font-weight:700}
+.small{font-size:13px;color:#667085}
+.booking{border:1px solid #e3e8ef;border-radius:14px;padding:15px;margin:12px 0}
+.success{background:#e9fff0;color:#08752e;padding:12px;border-radius:10px}
+.error{background:#fff0f0;color:#b42318;padding:12px;border-radius:10px}
+a{color:white}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logout{width:auto;background:#ffffff22;padding:9px 14px}
 </style>
 </head>
+
 <body>
-<div id="login" class="app login">
-  <div class="logo">Sameday <span>Repair</span></div>
-  <div class="muted">One login • Customer • Admin • Technician</div>
-  <div class="card" style="margin-top:25px">
-    <div class="field"><label>Mobile / Email</label><input id="loginId" placeholder="Enter login"></div>
-    <div class="field"><label>Password</label><input id="loginPass" type="password" placeholder="Enter password"></div>
-    <button class="primary full" onclick="login()">Login</button>
-    <div class="note">Demo roles: use <b>customer</b>, <b>admin</b>, or <b>technician</b> as login. Real authentication requires Firebase.</div>
-  </div>
+
+<header>
+<div class="topbar">
+<div>
+<div class="logo">Sameday Repair</div>
+<div class="small" style="color:#eaf4ff">Fast • Trusted • Professional Appliance Service</div>
+</div>
+<button id="logoutBtn" class="logout hidden" onclick="logout()">Logout</button>
+</div>
+</header>
+
+<div class="wrap">
+
+<!-- LOGIN -->
+<section id="authSection" class="card">
+<h2>Login / Create Account</h2>
+
+<div id="authMessage"></div>
+
+<input id="email" type="email" placeholder="Email address">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+<button class="secondary" onclick="signup()">Create Customer Account</button>
+
+<p class="small">
+Customer: create your own account.<br>
+Admin/Technician: login using the account created in Firebase Authentication.
+</p>
+</section>
+
+
+<!-- CUSTOMER -->
+<section id="customerSection" class="hidden">
+
+<div class="card">
+<h2>Book Appliance Repair</h2>
+
+<div id="customerMessage"></div>
+
+<input id="customerName" placeholder="Your Name">
+<input id="customerMobile" placeholder="Mobile Number">
+<input id="customerAddress" placeholder="Full Service Address">
+
+<select id="appliance">
+<option value="">Select Appliance</option>
+<option>Washing Machine</option>
+<option>Refrigerator</option>
+<option>Microwave Oven</option>
+<option>AC</option>
+<option>TV</option>
+<option>Other Appliance</option>
+</select>
+
+<textarea id="problem" placeholder="Describe the problem"></textarea>
+
+<button onclick="createBooking()">Book Technician</button>
 </div>
 
-<div id="app" class="app hidden">
-<header class="top"><div class="brand">Sameday <span>Repair</span></div><small id="roleText"></small></header>
-<div class="nav" id="nav"></div>
-<main class="screen">
-  <section id="customer" class="hidden">
-    <div class="title">Book a Repair</div><p class="muted">Tell us your appliance problem. We'll arrange a technician.</p>
-    <div class="grid">
-      <button class="service" onclick="choose('Washing Machine')"><span class="icon">🧺</span><b>Washing Machine</b></button>
-      <button class="service" onclick="choose('Refrigerator')"><span class="icon">❄️</span><b>Refrigerator</b></button>
-      <button class="service" onclick="choose('Microwave Oven')"><span class="icon">🍲</span><b>Microwave Oven</b></button>
-      <button class="service" onclick="choose('Air Conditioner')"><span class="icon">🌬️</span><b>AC</b></button>
-    </div>
-    <div class="card hero-card" id="bookingBox">
-      <b>New Service Request</b>
-      <div class="field"><label>Appliance</label><input id="appliance" placeholder="Select above"></div>
-      <div class="field"><label>Your Name</label><input id="cname"></div>
-      <div class="field"><label>Mobile</label><input id="cphone" type="tel"></div>
-      <div class="field"><label>Address</label><textarea id="caddress"></textarea></div>
-      <div class="field"><label>Problem</label><textarea id="cissue" placeholder="Example: machine making loud noise"></textarea></div>
-      <button class="primary full" onclick="createBooking()">Book Service</button>
-    </div>
-    <div id="customerBooking"></div>
-  </section>
-
-  <section id="admin" class="hidden">
-    <div class="title">Admin Dashboard</div><p class="muted">Review customer requests and assign your technicians.</p>
-    <div id="adminJobs"></div>
-  </section>
-
-  <section id="technician" class="hidden">
-    <div class="title">Technician Jobs</div><p class="muted">Jobs assigned to you appear here.</p>
-    <div id="techJobs"></div>
-  </section>
-
-  <section id="profile" class="hidden">
-    <div class="title">Account</div>
-    <div class="card"><b>Sameday Repair</b><p class="muted">Support: 9606211463<br>fmcreations005@gmail.com</p><button class="danger" onclick="logout()">Logout</button></div>
-  </section>
-</main>
+<div class="card">
+<h2>My Bookings</h2>
+<div id="myBookings">Loading...</div>
 </div>
-<div id="toast" class="toast"></div>
 
-<script>
-const KEY='sameday_repair_demo_v1';
-let data=JSON.parse(localStorage.getItem(KEY)||'{"bookings":[]}');
-let role='';
-let currentUser='';
-function save(){localStorage.setItem(KEY,JSON.stringify(data))}
-function toast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',2200)}
-function login(){
-  currentUser=document.getElementById('loginId').value.trim().toLowerCase();
-  if(!['customer','admin','technician'].includes(currentUser)){toast('Use customer, admin or technician for this demo');return}
-  role=currentUser;document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');
-  document.getElementById('roleText').textContent='Logged in as '+role;
-  buildNav();show(role==='technician'?'technician':role);
+</section>
+
+
+<!-- ADMIN -->
+<section id="adminSection" class="hidden">
+
+<div class="card">
+<h2>Admin Dashboard</h2>
+<div id="adminMessage"></div>
+<p class="small">All customer bookings appear here in real time.</p>
+</div>
+
+<div class="card">
+<h2>Bookings</h2>
+<div id="adminBookings">Loading...</div>
+</div>
+
+</section>
+
+
+<!-- TECHNICIAN -->
+<section id="technicianSection" class="hidden">
+
+<div class="card">
+<h2>Technician Dashboard</h2>
+<p class="small">Assigned service jobs</p>
+</div>
+
+<div class="card">
+<h2>My Jobs</h2>
+<div id="techBookings">Loading...</div>
+</div>
+
+</section>
+
+</div>
+
+
+<!-- FIREBASE -->
+<script type="module">
+
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
 }
-function buildNav(){
- const nav=document.getElementById('nav');
- nav.innerHTML='';
- const items=role==='customer'?[['customer','Book'],['profile','Account']]:role==='admin'?[['admin','Bookings'],['profile','Account']]:[['technician','Jobs'],['profile','Account']];
- items.forEach(x=>{let b=document.createElement('button');b.textContent=x[1];b.onclick=()=>show(x[0]);nav.appendChild(b)})
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc,
+addDoc,
+collection,
+query,
+where,
+orderBy,
+onSnapshot,
+updateDoc,
+serverTimestamp
 }
-function show(id){
- ['customer','admin','technician','profile'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));
- if(id==='admin')renderAdmin(); if(id==='technician')renderTech(); if(id==='customer')renderCustomer();
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+/* ===============================
+   FIREBASE CONFIG
+   =============================== */
+
+const firebaseConfig = {
+apiKey: "AIzaSyAjbs6VSZPoAj2eqHDBgSWMtuPhe9nu6WA",
+authDomain: "sameday-repair.firebaseapp.com",
+projectId: "sameday-repair",
+storageBucket: "sameday-repair.firebasestorage.app",
+messagingSenderId: "843755515045",
+appId: "1:843755515045:web:9cda462fe137d2537f714c"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+let currentRole = null;
+
+
+/* ===============================
+   HELPERS
+   =============================== */
+
+function message(id,text,type="success"){
+const el=document.getElementById(id);
+if(!el)return;
+el.innerHTML=`<div class="${type}">${text}</div>`;
 }
-function choose(a){document.getElementById('appliance').value=a;document.getElementById('bookingBox').scrollIntoView({behavior:'smooth'})}
-function createBooking(){
- const b={id:'SDR-'+Date.now().toString().slice(-6),appliance:appliance.value,name:cname.value.trim(),phone:cphone.value.trim(),address:caddress.value.trim(),issue:cissue.value.trim(),status:'NEW',technician:'',amount:0,payment:'PENDING',created:new Date().toLocaleString()};
- if(!b.appliance||!b.name||!b.phone||!b.address){toast('Please fill required details');return}
- data.bookings.unshift(b);save();renderCustomer();toast('Booking created: '+b.id)
+
+function hideAll(){
+document.getElementById("authSection").classList.add("hidden");
+document.getElementById("customerSection").classList.add("hidden");
+document.getElementById("adminSection").classList.add("hidden");
+document.getElementById("technicianSection").classList.add("hidden");
+document.getElementById("logoutBtn").classList.remove("hidden");
 }
-function renderCustomer(){
- const box=document.getElementById('customerBooking');
- if(!data.bookings.length){box.innerHTML='<div class="card muted">Your bookings will appear here.</div>';return}
- const b=data.bookings[0];
- box.innerHTML=`<div class="card"><div class="row"><b>${b.appliance}</b><span class="pill">${b.status}</span></div><p class="muted">${b.id}<br>${b.address}</p><div class="status">${['NEW','ACCEPTED','ON THE WAY','ARRIVED','REPAIRING','COMPLETED'].map(s=>`<i class="dot ${['NEW','ACCEPTED','ON THE WAY','ARRIVED','REPAIRING','COMPLETED'].indexOf(s)<=['NEW','ACCEPTED','ON THE WAY','ARRIVED','REPAIRING','COMPLETED'].indexOf(b.status)?'on':''}"></i>`).join('')}</div><p class="muted">Technician: <b>${b.technician||'Waiting for assignment'}</b></p>${b.amount?`<div class="amount">₹${b.amount}</div><small class="muted">Payment: ${b.payment}</small>`:''}</div>`
+
+
+/* ===============================
+   SIGN UP
+   =============================== */
+
+window.signup=async function(){
+
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+
+if(!email || password.length<6){
+message("authMessage","Email aur minimum 6 character password enter karo.","error");
+return;
 }
-function renderAdmin(){
- const box=document.getElementById('adminJobs');
- if(!data.bookings.length){box.innerHTML='<div class="card muted">No customer bookings yet.</div>';return}
- box.innerHTML=data.bookings.map((b,i)=>`<div class="card"><div class="row"><b>${b.appliance}</b><span class="pill">${b.status}</span></div><p class="muted"><b>${b.name}</b> • ${b.phone}<br>${b.address}<br>${b.issue||'No issue description'}<br>Booking: ${b.id}</p><div class="field"><label>Assign Technician</label><select onchange="assign(${i},this.value)"><option value="">Select technician</option><option ${b.technician==='Technician 1'?'selected':''}>Technician 1</option><option ${b.technician==='Technician 2'?'selected':''}>Technician 2</option><option ${b.technician==='Technician 3'?'selected':''}>Technician 3</option></select></div><div class="row"><input style="max-width:140px" type="number" placeholder="Estimate ₹" value="${b.amount||''}" onchange="amount(${i},this.value)"><button class="success" onclick="pay(${i})">Mark Paid</button></div></div>`).join('')
+
+try{
+
+const result=await createUserWithEmailAndPassword(
+auth,email,password
+);
+
+await setDoc(doc(db,"users",result.user.uid),{
+email:email,
+role:"customer",
+createdAt:serverTimestamp()
+});
+
+message("authMessage","Customer account created successfully.");
+
+}catch(e){
+message("authMessage",e.message,"error");
 }
-function assign(i,v){if(v){data.bookings[i].technician=v;data.bookings[i].status='ACCEPTED';save();renderAdmin();toast('Technician assigned')}}
-function amount(i,v){data.bookings[i].amount=Number(v)||0;save()}
-function pay(i){data.bookings[i].payment='PAID';save();renderAdmin();toast('Payment marked paid')}
-function renderTech(){
- const box=document.getElementById('techJobs'),jobs=data.bookings.filter(b=>b.technician);
- if(!jobs.length){box.innerHTML='<div class="card muted">No jobs assigned yet. Admin will assign a customer booking here.</div>';return}
- box.innerHTML=jobs.map(b=>{let i=data.bookings.indexOf(b);return `<div class="card"><div class="row"><b>${b.appliance}</b><span class="pill">${b.status}</span></div><p class="muted">${b.id}<br>${b.name} • ${b.phone}<br>${b.address}<br>${b.issue||''}</p><select onchange="status(${i},this.value)">${['ACCEPTED','ON THE WAY','ARRIVED','REPAIRING','COMPLETED'].map(s=>`<option ${s===b.status?'selected':''}>${s}</option>`).join('')}</select><div style="height:8px"></div><button class="ghost full" onclick="callCustomer('${b.phone}')">☎ Call Customer</button></div>`}).join('')
+};
+
+
+/* ===============================
+   LOGIN
+   =============================== */
+
+window.login=async function(){
+
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+
+if(!email || !password){
+message("authMessage","Email aur password enter karo.","error");
+return;
 }
-function status(i,v){data.bookings[i].status=v;save();renderTech();toast('Status updated')}
-function callCustomer(p){location.href='tel:'+p}
-function logout(){role='';currentUser='';document.getElementById('app').classList.add('hidden');document.getElementById('login').classList.remove('hidden')}
-renderCustomer();
+
+try{
+
+await signInWithEmailAndPassword(auth,email,password);
+
+}catch(e){
+message("authMessage",e.message,"error");
+}
+};
+
+
+/* ===============================
+   AUTH STATE
+   =============================== */
+
+onAuthStateChanged(auth,async(user)=>{
+
+if(!user){
+currentUser=null;
+currentRole=null;
+
+document.getElementById("authSection").classList.remove("hidden");
+document.getElementById("customerSection").classList.add("hidden");
+document.getElementById("adminSection").classList.add("hidden");
+document.getElementById("technicianSection").classList.add("hidden");
+document.getElementById("logoutBtn").classList.add("hidden");
+
+return;
+}
+
+currentUser=user;
+
+const userDoc=await getDoc(doc(db,"users",user.uid));
+
+if(!userDoc.exists()){
+
+await setDoc(doc(db,"users",user.uid),{
+email:user.email,
+role:"customer",
+createdAt:serverTimestamp()
+});
+
+currentRole="customer";
+
+}else{
+currentRole=userDoc.data().role || "customer";
+}
+
+hideAll();
+
+if(currentRole==="admin"){
+document.getElementById("adminSection").classList.remove("hidden");
+loadAdminBookings();
+
+}else if(currentRole==="technician"){
+document.getElementById("technicianSection").classList.remove("hidden");
+loadTechnicianBookings();
+
+}else{
+document.getElementById("customerSection").classList.remove("hidden");
+loadCustomerBookings();
+}
+
+});
+
+
+/* ===============================
+   LOGOUT
+   =============================== */
+
+window.logout=async function(){
+await signOut(auth);
+};
+
+
+/* ===============================
+   CUSTOMER BOOKING
+   =============================== */
+
+window.createBooking=async function(){
+
+if(!currentUser)return;
+
+const name=document.getElementById("customerName").value.trim();
+const mobile=document.getElementById("customerMobile").value.trim();
+const address=document.getElementById("customerAddress").value.trim();
+const appliance=document.getElementById("appliance").value;
+const problem=document.getElementById("problem").value.trim();
+
+if(!name || !mobile || !address || !appliance || !problem){
+message("customerMessage","Please complete all booking details.","error");
+return;
+}
+
+try{
+
+const bookingId="SDR-"+Math.floor(100000+Math.random()*900000);
+
+await addDoc(collection(db,"bookings"),{
+
+bookingId:bookingId,
+customerId:currentUser.uid,
+customerEmail:currentUser.email,
+customerName:name,
+mobile:mobile,
+address:address,
+appliance:appliance,
+problem:problem,
+
+status:"Booked",
+technicianId:"",
+technicianName:"Waiting for assignment",
+
+estimate:0,
+paymentStatus:"Pending",
+
+createdAt:serverTimestamp(),
+updatedAt:serverTimestamp()
+
+});
+
+message(
+"customerMessage",
+`Booking confirmed! Your Booking ID is <b>${bookingId}</b>`
+);
+
+document.getElementById("problem").value="";
+
+}catch(e){
+message("customerMessage",e.message,"error");
+}
+};
+
+
+/* ===============================
+   CUSTOMER BOOKINGS
+   =============================== */
+
+function loadCustomerBookings(){
+
+const q=query(
+collection(db,"bookings"),
+where("customerId","==",currentUser.uid)
+);
+
+onSnapshot(q,(snapshot)=>{
+
+const box=document.getElementById("myBookings");
+
+if(snapshot.empty){
+box.innerHTML="<p class='small'>No bookings yet.</p>";
+return;
+}
+
+box.innerHTML="";
+
+snapshot.forEach(d=>{
+
+const b=d.data();
+
+box.innerHTML+=`
+
+<div class="booking">
+
+<h3>${b.appliance}</h3>
+
+<p><b>Booking:</b> ${b.bookingId}</p>
+
+<p><b>Problem:</b> ${b.problem}</p>
+
+<p><b>Technician:</b> ${b.technicianName || "Waiting for assignment"}</p>
+
+<p><b>Status:</b>
+<span class="status">${b.status || "Booked"}</span>
+</p>
+
+<p><b>Estimate:</b> ₹${b.estimate || 0}</p>
+
+<p><b>Payment:</b> ${b.paymentStatus || "Pending"}</p>
+
+</div>
+`;
+
+});
+
+});
+}
+
+
+/* ===============================
+   ADMIN BOOKINGS
+   =============================== */
+
+function loadAdminBookings(){
+
+const q=query(
+collection(db,"bookings")
+);
+
+onSnapshot(q,(snapshot)=>{
+
+const box=document.getElementById("adminBookings");
+
+if(snapshot.empty){
+box.innerHTML="<p>No bookings yet.</p>";
+return;
+}
+
+box.innerHTML="";
+
+snapshot.forEach(d=>{
+
+const b=d.data();
+
+box.innerHTML+=`
+
+<div class="booking">
+
+<h3>${b.appliance}</h3>
+
+<p><b>Booking:</b> ${b.bookingId}</p>
+
+<p><b>Customer:</b> ${b.customerName}</p>
+
+<p><b>Mobile:</b> ${b.mobile}</p>
+
+<p><b>Address:</b> ${b.address}</p>
+
+<p><b>Problem:</b> ${b.problem}</p>
+
+<p>
+<b>Status:</b>
+<span class="status">${b.status}</span>
+</p>
+
+<p>
+<b>Technician:</b>
+${b.technicianName || "Not assigned"}
+</p>
+
+<input
+id="tech_${d.id}"
+placeholder="Technician UID">
+
+<input
+id="techName_${d.id}"
+placeholder="Technician Name">
+
+<input
+id="estimate_${d.id}"
+type="number"
+placeholder="Estimate ₹">
+
+<button onclick="assignTechnician('${d.id}')">
+Assign Technician
+</button>
+
+</div>
+`;
+
+});
+
+});
+}
+
+
+/* ===============================
+   ADMIN ASSIGN TECHNICIAN
+   =============================== */
+
+window.assignTechnician=async function(id){
+
+const techId=document.getElementById("tech_"+id).value.trim();
+const techName=document.getElementById("techName_"+id).value.trim();
+const estimate=document.getElementById("estimate_"+id).value;
+
+if(!techId || !techName){
+alert("Technician UID aur Name enter karo.");
+return;
+}
+
+try{
+
+const techDoc=await getDoc(doc(db,"users",techId));
+
+if(!techDoc.exists()){
+alert("Technician UID Firebase users collection mein nahi mila.");
+return;
+}
+
+if(techDoc.data().role!=="technician"){
+alert("Ye UID technician account nahi hai.");
+return;
+}
+
+await updateDoc(doc(db,"bookings",id),{
+
+technicianId:techId,
+technicianName:techName,
+estimate:Number(estimate)||0,
+status:"Accepted",
+updatedAt:serverTimestamp()
+
+});
+
+alert("Technician assigned successfully.");
+
+}catch(e){
+alert(e.message);
+}
+
+};
+
+
+/* ===============================
+   TECHNICIAN BOOKINGS
+   =============================== */
+
+function loadTechnicianBookings(){
+
+const q=query(
+collection(db,"bookings"),
+where("technicianId","==",currentUser.uid)
+);
+
+onSnapshot(q,(snapshot)=>{
+
+const box=document.getElementById("techBookings");
+
+if(snapshot.empty){
+box.innerHTML="<p class='small'>No jobs assigned.</p>";
+return;
+}
+
+box.innerHTML="";
+
+snapshot.forEach(d=>{
+
+const b=d.data();
+
+box.innerHTML+=`
+
+<div class="booking">
+
+<h3>${b.appliance}</h3>
+
+<p><b>Booking:</b> ${b.bookingId}</p>
+
+<p><b>Customer:</b> ${b.customerName}</p>
+
+<p><b>Mobile:</b> ${b.mobile}</p>
+
+<p><b>Address:</b> ${b.address}</p>
+
+<p><b>Problem:</b> ${b.problem}</p>
+
+<p>
+<b>Status:</b>
+<span class="status">${b.status}</span>
+</p>
+
+<button onclick="updateStatus('${d.id}','On the Way')">
+On the Way
+</button>
+
+<button onclick="updateStatus('${d.id}','Arrived')">
+Arrived
+</button>
+
+<button onclick="updateStatus('${d.id}','Repairing')">
+Repairing
+</button>
+
+<button onclick="updateStatus('${d.id}','Completed')">
+Completed
+</button>
+
+</div>
+`;
+
+});
+
+});
+}
+
+
+/* ===============================
+   TECHNICIAN STATUS
+   =============================== */
+
+window.updateStatus=async function(id,status){
+
+try{
+
+await updateDoc(doc(db,"bookings",id),{
+status:status,
+updatedAt:serverTimestamp()
+});
+
+}catch(e){
+alert(e.message);
+}
+
+};
+
 </script>
+
 </body>
 </html>
