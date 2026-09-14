@@ -302,9 +302,11 @@ createdAt:serverTimestamp()
 currentRole="customer";
 
 }else{
-currentRole=userDoc.data().role || "customer";
-}
-
+if(user.email === "fmcreations005@gmail.com"){
+  currentRole = "admin";
+  }
+ }
+   
 hideAll();
 
 if(currentRole==="admin"){
