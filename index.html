@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sameday Repair | Appliance Repair Booking</title>
-<meta name="description" content="Sameday Repair - Washing Machine, Refrigerator, Microwave, AC and appliance repair booking.">
+<meta name="description" content="Sameday Repair - appliance repair booking and technician service app.">
+
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
@@ -16,7 +17,6 @@ input,select,textarea,button{width:100%;padding:12px;margin:6px 0;border-radius:
 textarea{min-height:90px}
 button{border:0;background:#0757d9;color:#fff;font-weight:700;cursor:pointer}
 button.secondary{background:#eef4ff;color:#0757d9}
-button.danger{background:#dc3545}
 .hidden{display:none}
 .status{display:inline-block;padding:6px 10px;border-radius:18px;background:#e8f2ff;color:#0757d9;font-weight:700}
 .small{font-size:13px;color:#667085}
@@ -25,8 +25,7 @@ button.danger{background:#dc3545}
 .error{background:#fff0f0;color:#b42318;padding:11px;border-radius:9px}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .logout{width:auto;background:#ffffff22;padding:8px 13px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-@media(max-width:600px){.row{grid-template-columns:1fr}}
+@media(max-width:600px){.wrap{padding:10px}}
 </style>
 </head>
 
@@ -40,7 +39,6 @@ button.danger{background:#dc3545}
 Fast • Trusted • Professional Appliance Service
 </div>
 </div>
-
 <button id="logoutBtn" class="logout hidden" onclick="logout()">Logout</button>
 </div>
 </header>
@@ -49,7 +47,6 @@ Fast • Trusted • Professional Appliance Service
 
 <!-- LOGIN -->
 <section id="authSection" class="card">
-
 <h2>Login</h2>
 
 <div id="authMessage"></div>
@@ -65,10 +62,9 @@ Create Customer Account
 </button>
 
 <p class="small">
-Customers can create an account.
-Admin and technicians use accounts created in Firebase Authentication.
+Customer account yahan create kar sakte hain.
+Admin aur Technician accounts Firebase Authentication se create honge.
 </p>
-
 </section>
 
 
@@ -76,7 +72,6 @@ Admin and technicians use accounts created in Firebase Authentication.
 <section id="customerSection" class="hidden">
 
 <div class="card">
-
 <h2>Book Appliance Repair</h2>
 
 <div id="customerMessage"></div>
@@ -88,39 +83,24 @@ Admin and technicians use accounts created in Firebase Authentication.
 <input id="customerAddress" placeholder="Full Service Address">
 
 <select id="appliance">
-
 <option value="">Select Appliance</option>
-
 <option>Washing Machine</option>
-
 <option>Refrigerator</option>
-
 <option>Microwave Oven</option>
-
 <option>AC</option>
-
 <option>TV</option>
-
 <option>Other Appliance</option>
-
 </select>
 
-<textarea id="problem"
-placeholder="Describe the problem"></textarea>
+<textarea id="problem" placeholder="Describe the problem"></textarea>
 
-<button onclick="createBooking()">
-Book Technician
-</button>
-
+<button onclick="createBooking()">Book Technician</button>
 </div>
 
 
 <div class="card">
-
 <h2>My Bookings</h2>
-
 <div id="myBookings">Loading...</div>
-
 </div>
 
 </section>
@@ -130,26 +110,16 @@ Book Technician
 <section id="adminSection" class="hidden">
 
 <div class="card">
-
 <h2>Admin Dashboard</h2>
-
 <p class="small">
-Assign technicians to customer bookings.
+Assign technician to customer booking.
 </p>
-
 <div id="adminMessage"></div>
-
 </div>
-
 
 <div class="card">
-
-<h2>Bookings</h2>
-
-<div id="adminBookings">
-Loading...
-</div>
-
+<h2>All Customer Bookings</h2>
+<div id="adminBookings">Loading...</div>
 </div>
 
 </section>
@@ -159,23 +129,17 @@ Loading...
 <section id="technicianSection" class="hidden">
 
 <div class="card">
-
 <h2>Technician Dashboard</h2>
 
 <p class="small">
-Only jobs assigned to your technician UID are shown.
+Only your assigned jobs are shown.
 </p>
-
 </div>
-
 
 <div class="card">
-
 <h2>My Jobs</h2>
 
-<div id="techBookings">
-Loading...
-</div>
+<div id="techBookings">Loading...</div>
 
 </div>
 
@@ -214,11 +178,11 @@ serverTimestamp
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* FIREBASE */
+/* FIREBASE CONFIG */
 
 const firebaseConfig={
 
-apiKey:"AIzaSyAjbs6VIzP0Aj2eqHDBgSWMtuPhe9nu6WA",
+apiKey:"AIzaSyAjbs6VSZPoAj2eqHDBgSWMtuPhe9nu6WA",
 
 authDomain:"sameday-repair.firebaseapp.com",
 
@@ -239,8 +203,6 @@ const auth=getAuth(app);
 
 const db=getFirestore(app);
 
-
-/* GLOBAL */
 
 let currentUser=null;
 
@@ -265,28 +227,23 @@ el.innerHTML=
 }
 
 
-/* HIDE ALL */
+/* HIDE */
 
 function hideAll(){
 
-document
-.getElementById("authSection")
+document.getElementById("authSection")
 .classList.add("hidden");
 
-document
-.getElementById("customerSection")
+document.getElementById("customerSection")
 .classList.add("hidden");
 
-document
-.getElementById("adminSection")
+document.getElementById("adminSection")
 .classList.add("hidden");
 
-document
-.getElementById("technicianSection")
+document.getElementById("technicianSection")
 .classList.add("hidden");
 
-document
-.getElementById("logoutBtn")
+document.getElementById("logoutBtn")
 .classList.remove("hidden");
 
 }
@@ -326,18 +283,16 @@ password
 );
 
 
-/*
-IMPORTANT:
-New accounts are CUSTOMER only.
-Admin/Technician accounts must be created in Firebase.
-*/
-
 await setDoc(
 doc(db,"users",result.user.uid),
 {
+
 email:email,
+
 role:"customer",
+
 createdAt:serverTimestamp()
+
 }
 );
 
@@ -429,25 +384,19 @@ currentUser=null;
 
 currentRole=null;
 
-
-document
-.getElementById("authSection")
+document.getElementById("authSection")
 .classList.remove("hidden");
 
-document
-.getElementById("customerSection")
+document.getElementById("customerSection")
 .classList.add("hidden");
 
-document
-.getElementById("adminSection")
+document.getElementById("adminSection")
 .classList.add("hidden");
 
-document
-.getElementById("technicianSection")
+document.getElementById("technicianSection")
 .classList.add("hidden");
 
-document
-.getElementById("logoutBtn")
+document.getElementById("logoutBtn")
 .classList.add("hidden");
 
 return;
@@ -467,19 +416,18 @@ const userSnap=
 await getDoc(userRef);
 
 
-/*
-If user document doesn't exist,
-make normal customer account.
-*/
-
 if(!userSnap.exists()){
 
 await setDoc(
 userRef,
 {
+
 email:user.email || "",
+
 role:"customer",
+
 createdAt:serverTimestamp()
+
 }
 );
 
@@ -493,9 +441,7 @@ userSnap.data().role || "customer";
 }
 
 
-/*
-ADMIN EMAIL SAFETY
-*/
+/* ADMIN */
 
 if(user.email==="fmcreations005@gmail.com"){
 
@@ -507,38 +453,27 @@ currentRole="admin";
 hideAll();
 
 
-/* ADMIN */
-
 if(currentRole==="admin"){
 
-document
-.getElementById("adminSection")
+document.getElementById("adminSection")
 .classList.remove("hidden");
 
 loadAdminBookings();
 
 }
 
-
-/* TECHNICIAN */
-
 else if(currentRole==="technician"){
 
-document
-.getElementById("technicianSection")
+document.getElementById("technicianSection")
 .classList.remove("hidden");
 
 loadTechnicianBookings();
 
 }
 
-
-/* CUSTOMER */
-
 else{
 
-document
-.getElementById("customerSection")
+document.getElementById("customerSection")
 .classList.remove("hidden");
 
 loadCustomerBookings();
@@ -565,20 +500,12 @@ e.message,
 
 window.logout=async function(){
 
-try{
-
 await signOut(auth);
-
-}catch(e){
-
-console.error(e);
-
-}
 
 };
 
 
-/* CREATE CUSTOMER BOOKING */
+/* CUSTOMER BOOKING */
 
 window.createBooking=async function(){
 
@@ -592,19 +519,24 @@ return;
 
 
 const name=
-document.getElementById("customerName").value.trim();
+document.getElementById("customerName")
+.value.trim();
 
 const mobile=
-document.getElementById("customerMobile").value.trim();
+document.getElementById("customerMobile")
+.value.trim();
 
 const address=
-document.getElementById("customerAddress").value.trim();
+document.getElementById("customerAddress")
+.value.trim();
 
 const appliance=
-document.getElementById("appliance").value;
+document.getElementById("appliance")
+.value;
 
 const problem=
-document.getElementById("problem").value.trim();
+document.getElementById("problem")
+.value.trim();
 
 
 if(
@@ -680,9 +612,7 @@ message(
 );
 
 
-document
-.getElementById("problem")
-.value="";
+document.getElementById("problem").value="";
 
 
 }catch(e){
@@ -718,6 +648,7 @@ currentUser.uid
 unsubscribeBookings=
 onSnapshot(
 q,
+
 (snapshot)=>{
 
 const box=
@@ -818,6 +749,7 @@ collection(db,"bookings")
 unsubscribeBookings=
 onSnapshot(
 q,
+
 (snapshot)=>{
 
 const box=
@@ -877,11 +809,9 @@ ${b.problem || ""}
 
 <p>
 <b>Status:</b>
-
 <span class="status">
 ${b.status || "Booked"}
 </span>
-
 </p>
 
 <p>
@@ -895,19 +825,16 @@ id="tech_${d.id}"
 placeholder="Technician UID"
 >
 
-
 <input
 id="techName_${d.id}"
 placeholder="Technician Name"
 >
-
 
 <input
 id="estimate_${d.id}"
 type="number"
 placeholder="Estimate ₹"
 >
-
 
 <button
 onclick="assignTechnician('${d.id}')"
@@ -945,20 +872,15 @@ e.message,
 window.assignTechnician=async function(id){
 
 const techId=
-document
-.getElementById("tech_"+id)
-.value
-.trim();
+document.getElementById("tech_"+id)
+.value.trim();
 
 const techName=
-document
-.getElementById("techName_"+id)
-.value
-.trim();
+document.getElementById("techName_"+id)
+.value.trim();
 
 const estimate=
-document
-.getElementById("estimate_"+id)
+document.getElementById("estimate_"+id)
 .value;
 
 
@@ -986,12 +908,9 @@ return;
 
 try{
 
-
 /*
-IMPORTANT:
-ONLY READ technician user document.
-NO WRITE HERE.
-This prevents the old permission problem.
+Technician user document is READ ONLY.
+No write to users collection.
 */
 
 const techSnap=
@@ -1003,7 +922,7 @@ doc(db,"users",techId)
 if(!techSnap.exists()){
 
 alert(
-"Technician UID Firebase users collection mein nahi mila."
+"Technician UID Firebase mein nahi mila."
 );
 
 return;
@@ -1018,7 +937,7 @@ techSnap.data();
 if(techData.role!=="technician"){
 
 alert(
-"Is UID ke users document mein role = technician hona chahiye."
+"Technician ke users document mein role = technician hona chahiye."
 );
 
 return;
@@ -1026,9 +945,7 @@ return;
 }
 
 
-/*
-ONLY BOOKING IS UPDATED.
-*/
+/* ONLY BOOKING UPDATE */
 
 await updateDoc(
 doc(db,"bookings",id),
@@ -1038,13 +955,11 @@ technicianId:techId,
 
 technicianName:techName,
 
-estimate:
-Number(estimate)||0,
+estimate:Number(estimate)||0,
 
 status:"Accepted",
 
-updatedAt:
-serverTimestamp()
+updatedAt:serverTimestamp()
 
 }
 );
@@ -1086,6 +1001,7 @@ currentUser.uid
 unsubscribeBookings=
 onSnapshot(
 q,
+
 (snapshot)=>{
 
 const box=
@@ -1150,11 +1066,9 @@ ${b.problem || ""}
 
 <p>
 <b>Status:</b>
-
 <span class="status">
 ${b.status || "Accepted"}
 </span>
-
 </p>
 
 
@@ -1164,20 +1078,17 @@ onclick="updateStatus('${d.id}','On the Way')"
 On the Way
 </button>
 
-
 <button
 onclick="updateStatus('${d.id}','Arrived')"
 >
 Arrived
 </button>
 
-
 <button
 onclick="updateStatus('${d.id}','Repairing')"
 >
 Repairing
 </button>
-
 
 <button
 onclick="updateStatus('${d.id}','Completed')"
@@ -1197,8 +1108,7 @@ e=>{
 
 console.error(e);
 
-document
-.getElementById("techBookings")
+document.getElementById("techBookings")
 .innerHTML=
 `<div class="error">${e.message}</div>`;
 
@@ -1232,12 +1142,11 @@ doc(db,"bookings",id),
 
 status:status,
 
-updatedAt:
-serverTimestamp()
+updatedAt:serverTimestamp()
 
 }
-);
 
+);
 
 }catch(e){
 
